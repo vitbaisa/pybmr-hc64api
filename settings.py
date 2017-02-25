@@ -2,7 +2,7 @@ settings = {
     'rooms': 8,
     'protocol': 'http',
     'ip': '192.168.51.3',
-    'consumption': { # kW
+    'consumption': { # watt
         'Obyvaci pokoj': 1500,
         'Koupelna 1NP': 500,
         'Pracovna': 700,
