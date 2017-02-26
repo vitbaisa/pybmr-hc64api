@@ -1,18 +1,19 @@
+#!/usr/bin/python
+#coding=utf-8
+
 settings = {
-    'rooms': 8,
     'protocol': 'http',
     'ip': '192.168.51.3',
-    'consumption': { # watt
-        'Obyvaci pokoj': 1500,
-        'Koupelna 1NP': 500,
-        'Pracovna': 700,
-        'ZadveriChodb': 500,
-        'Pokoj 1': 500,
-        'Pokoj 2': 500,
-        'Loznice': 700,
-        'Koupelna 2NP': 500,
-    },
-    'logfile': '/home/xbaisa/src/babice_dashboard/db.log',
+    'channels': [
+        (u'Obývací pokoj'), 1500)
+        (u'Koupelna', 500),
+        (u'Pracovna', 700),
+        (u'Zádveří', 500),
+        (u'Pokoj 1', 500),
+        (u'Pokoj 2', 500),
+        (u'Ložnice', 700),
+        (u'Technická místnost', 500)
+    ],
     'username': 'baisa',
     'password': 'ba15a1234',
 }
