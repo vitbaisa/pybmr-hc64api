@@ -16,7 +16,6 @@ class BMRAPI():
         self.password = settings.get('password', '1234')
         self.session = requests.Session()
         self.version = '0.9'
-        # login
         #self.login()
 
     def obfuscate(self, s):
@@ -50,19 +49,30 @@ class BMRAPI():
         try:
             return {
                 'name': s[1:14].strip(),
-                'current': float(s[14:19]),
-                'required': float(s[20:22]),
-                'required_all': float(s[22:27]),
+                'current_temp': float(s[14:19]),
+                'required_temp': float(s[20:22]),
+                'required_all_temp': float(s[22:27]),
                 'offset': float(s[27:32]),
                 'max_offset': float(s[33:36]),
                 'heating': int(s[36]),
                 'inhibited': int(s[42]),
-                'summer': int(s[43]),
+                'summer_mode': int(s[43]),
             }
         except ValueError, KeyError:
             return {}
 
+    def get_all_realtime_data(self):
+        d = {'channels': []}
+        for i in range(len(self.channels)):
+            d['channels'].append(self.get_channel_data(i))
+            d['channels'][i]['consumption'] = self.channels[i][1]
+        d['total_consumption'] = sum([item['consumption'] for item in d['channels'] if item['heating']])
+        d['active_heaters'] = sum([1 for item in d['channels'] if item['heating']])
+        d['hdo'] = self.hdo_is_low() and 'low' or 'high'
+        return d
+
     def get_raw_channel_data(self, channel=0):
+        # TODO detect error login
         return self.session.post(self.protocol + '://' + self.host + '/wholeRoom', data={'param': channel}).text
 
     def get_channel_data(self, channel=0):
