@@ -3,9 +3,9 @@
 
 settings = {
     'protocol': 'http',
-    'ip': '192.168.51.3',
+    'host': '192.168.51.3',
     'channels': [
-        (u'Obývací pokoj'), 1500)
+        (u'Obývací pokoj', 1500),
         (u'Koupelna', 500),
         (u'Pracovna', 700),
         (u'Zádveří', 500),
