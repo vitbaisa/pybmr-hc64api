@@ -1,8 +1,41 @@
 #!/usr/bin/python
 
 import sys
+import time
 import requests
 import datetime
+
+from pyModbusTCP.client import ModbusClient
+
+class BMRModbusAPI():
+    "BMR RT64 regulation client API using pyModbusTCP"
+
+    def __init__(self, settings):
+        self.protocol = settings.get('protocol', 'http://')
+        self.host = settings.get('host', 'localhost')
+        self.port = settings.get('port', 502)
+        self.channels = settings.get('channels', [])
+        self.rooms = len(self.channels)
+        self.username = settings.get('username', 'user')
+        self.password = settings.get('password', '1234')
+        self.session = requests.Session()
+        self.version = '0.9'
+
+    def read_registers(self):
+        # http://pythonhosted.org/pyModbusTCP/examples/read_register.html
+        c = ModbusClient()
+        c.debug(True)
+        c.host(self.host)
+        c.port(self.port)
+        while True:
+            if not c.is_open():
+                if not c.open():
+                    print "unable to connect to " + self.host + ":" + str(self.port)
+            if c.is_open():
+                regs = c.read_holding_registers(2033, 1)
+                if regs:
+                    print "reg ad #0 to 9: " + str(regs)
+            time.sleep(2)
 
 class BMRAPI():
     "BMR RT64 regulation API as observed from BMR client web app"
