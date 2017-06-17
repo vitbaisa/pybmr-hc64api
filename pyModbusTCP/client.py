@@ -857,6 +857,7 @@ class ModbusClient:
                 return None
             # end of frame
             rx_buffer = self._recv(rx_hd_length - 1)
+            """
             if not (rx_buffer and
                     (len(rx_buffer) == rx_hd_length - 1) and
                     (len(rx_buffer) >= 2)):
@@ -864,6 +865,7 @@ class ModbusClient:
                 self.__debug_msg('_recv frame body error')
                 self.close()
                 return None
+            """
             rx_frame += rx_buffer
             # dump frame
             if self.__debug:
