@@ -1,13 +1,16 @@
-1Koupelna 2NP 019.8+22022.0000.005.0100000000
-                    22.0 19.8 heating
+## BMR HC 64 API, modbus TCP
 
-všechny okruhy útlum =>
+See [pyModbusTCP](http://pythonhosted.org/pyModbusTCP/) documentation.
 
-1Koupelna 2NP 019.9+22022.0000.005.0100000100
-22.0 19.9 heating down
+BMC HC 64 modbus TCP answers on port 502. Register values are read using function no. 3
+'Read Holding Register'. One register has 2 bytes. Temperatures are stored as 2
+byte integers.
 
-1Koupelna 2NP 020.0+16016.0000.005.0000000100
-16.0 20.0 down
+A block of register addresses for room information starts
 
-1Koupelna 2NP 020.2+16016.0004.005.0000000100
-16.0(+4.0) 20.2 hand down
+Room no. | Address |
+---------|---------|
+1        | 2032    |
+2        | 2038    |
+
+There are 32 rooms.
