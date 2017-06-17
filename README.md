@@ -10,7 +10,14 @@ A block of register addresses for room information starts
 
 Room no. | Address |
 ---------|---------|
-1        | 2032    |
-2        | 2038    |
+1        | 2033    |
+2        | 2039    |
+3        | 2045    |
+4        | 2051    |
+5        | 2057    |
+6        | 2063    |
+7        | 2069    |
+8        | 2075    |
+...
 
 There are 32 rooms.
